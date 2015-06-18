@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.opentsdb.client.builder.MetricBuilder;
 import org.opentsdb.client.response.ErrorDetail;
 import org.opentsdb.client.response.Response;
@@ -18,7 +19,7 @@ import com.google.gson.GsonBuilder;
  */
 public class HttpClientImpl implements HttpClient {
 
-	// private static Logger logger = Logger.getLogger(HttpClientImpl.class);
+	private static Logger logger = Logger.getLogger(HttpClientImpl.class);
 
 	private String serviceUrl;
 
@@ -43,6 +44,8 @@ public class HttpClientImpl implements HttpClient {
 	public Response pushMetrics(MetricBuilder builder,
 			ExpectResponse expectResponse) throws IOException {
 		checkNotNull(builder);
+
+		// TODO 错误处理，比如IOException或者failed>0，写到队列或者文件后续重试。
 		SimpleHttpResponse response = httpClient
 				.doPost(buildUrl(serviceUrl, POST_API, expectResponse),
 						builder.build());
@@ -72,9 +75,13 @@ public class HttpClientImpl implements HttpClient {
 		Response response = new Response(httpResponse.getStatusCode());
 		String content = httpResponse.getContent();
 		if (StringUtils.isNotEmpty(content)) {
-			ErrorDetail errorDetail = mapper.fromJson(content,
-					ErrorDetail.class);
-			response.setErrorDetail(errorDetail);
+			if (response.isSuccess()) {
+				ErrorDetail errorDetail = mapper.fromJson(content,
+						ErrorDetail.class);
+				response.setErrorDetail(errorDetail);
+			} else {
+				logger.error("request failed!" + httpResponse);
+			}
 		}
 		return response;
 	}

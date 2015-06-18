@@ -10,6 +10,10 @@ public class Response {
 	public Response() {
 	}
 
+	public boolean isSuccess() {
+		return statusCode == 200 || statusCode == 204;
+	}
+
 	public Response(int statusCode) {
 		this.statusCode = statusCode;
 	}

@@ -249,8 +249,6 @@ public class PoolingHttpClient {
 		public void run() {
 			try {
 				while (!shutdown) {
-					System.out
-							.println("idle http connetion monitor thread is runing...");
 					synchronized (this) {
 						wait(5000);
 						// Close expired connections
