@@ -3,11 +3,15 @@ package org.opentsdb.client;
 import java.io.IOException;
 
 import org.opentsdb.client.builder.MetricBuilder;
+import org.opentsdb.client.request.QueryBuilder;
 import org.opentsdb.client.response.Response;
+import org.opentsdb.client.response.SimpleHttpResponse;
 
 public interface Client {
 
-	public final static String POST_API = "/api/put";
+	String PUT_POST_API = "/api/put";
+
+    String QUERY_POST_API = "/api/query";
 
 	/**
 	 * Sends metrics from the builder to the KairosDB server.
@@ -20,4 +24,5 @@ public interface Client {
 	 */
 	Response pushMetrics(MetricBuilder builder) throws IOException;
 
+	SimpleHttpResponse pushQueries(QueryBuilder builder) throws IOException;
 }
