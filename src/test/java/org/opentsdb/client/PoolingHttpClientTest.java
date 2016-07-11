@@ -21,7 +21,7 @@ public class PoolingHttpClientTest {
 						.addTag("tag2", "tab2value");
 
 				SimpleHttpResponse response = client.doPost(
-						"http://localhost:8242/api/put/?details",
+						"http://10.75.201.130:4242/api/put/?details",
 						builder.build());
 				System.out.println(response.getStatusCode());
 				System.out.println(response.getContent());
