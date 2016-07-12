@@ -29,7 +29,7 @@ public class QueryTest {
         subQueries.addMetric("metric_fund").addTag("product", "HQD").addAggregator(zimsum).addDownsample("1s-" +
                 zimsum);
         long now = new Date().getTime() / 1000;
-        builder.getQuery().addStart(1263587200).addEnd(now).addSubQuery(subQueries);
+        builder.getQuery().addStart(126358720).addEnd(now).addSubQuery(subQueries);
         System.out.println(builder.build());
 
         try {
@@ -45,6 +45,7 @@ public class QueryTest {
                     Map<String, String> map = JSON.parseObject(dps, Map.class);
                     for (Map.Entry entry : map.entrySet()) {
                         System.out.println("Time:" + entry.getKey() + ",Value:" + entry.getValue());
+                        Double.parseDouble(String.valueOf(entry.getValue()));
                     }
                 }
             }
