@@ -8,7 +8,7 @@ public class Filter {
     private String type;
     private String tagk;
     private String filter;
-    private Boolean groupBy;
+    private Boolean groupBy = false;
 
     public String getType() {
         return type;
