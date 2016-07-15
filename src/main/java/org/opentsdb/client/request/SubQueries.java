@@ -33,11 +33,19 @@ public class SubQueries {
         return this;
     }
 
+    /**
+     * Tags are converted to filters in 2.2
+     */
+    @Deprecated
     public SubQueries addTag(Map<String, String> tag) {
         this.tags.putAll(tag);
         return this;
     }
 
+    /**
+     * Tags are converted to filters in 2.2
+     */
+    @Deprecated
     public SubQueries addTag(String tag, String value) {
         this.tags.put(tag, value);
         return this;
