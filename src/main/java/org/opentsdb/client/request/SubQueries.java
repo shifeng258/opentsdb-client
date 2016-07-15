@@ -16,7 +16,7 @@ public class SubQueries {
     private Map<String, String> rateOptions;
     private String downsample;
     private Map<String, String> tags = new HashMap<String, String>();
-    private List<Filter> filters = new ArrayList<Filter>();
+    //private List<Filter> filters = new ArrayList<Filter>();
 
     public SubQueries addAggregator(String aggregator) {
         this.aggregator = aggregator;
@@ -91,11 +91,11 @@ public class SubQueries {
         this.tags = tags;
     }
 
-    public List<Filter> getFilters() {
+    /*public List<Filter> getFilters() {
         return filters;
     }
 
     public void setFilters(List<Filter> filters) {
         this.filters = filters;
-    }
+    }*/
 }
