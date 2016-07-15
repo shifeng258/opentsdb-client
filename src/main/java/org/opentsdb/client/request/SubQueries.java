@@ -87,6 +87,10 @@ public class SubQueries {
         return tags;
     }
 
+    /**
+     * Tags are converted to filters in 2.2
+     */
+    @Deprecated
     public void setTags(Map<String, String> tags) {
         this.tags = tags;
     }
